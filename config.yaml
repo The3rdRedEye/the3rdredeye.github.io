@@ -1,0 +1,32 @@
+baseURL: https://thered3rdeye.github.io/
+languageCode: en-us
+theme: photophobia
+
+DefaultContentLanguage: en
+SectionPagesMenu: main
+Paginate: 3
+
+languages:
+  en:
+    title: The Red 3rd Eye
+    weight: 1
+    contentDir: content/en
+  vn:
+    title: The Red 3rd Eye
+    weight: 2
+    contentDir: content/vn
+
+sitemap:
+  changefreq: daily
+  priority: 0.5
+  filename: sitemap.xml
+
+params:
+  favicon: null
+  site_logo: null
+  description: null
+  recent_posts_number: 10
+
+markup:
+  highlight:
+    style: native
