@@ -4,20 +4,24 @@
 <meta http-equiv=x-ua-compatible content="IE=edge,chrome=1">
 <meta name=viewport content="width=device-width,minimum-scale=1">
 <meta name=generator content="Hugo 0.87.0">
-<title>The Red 3rd Eye</title>
+<title>Better Dotfiles Management | The Red 3rd Eye</title>
 <meta name=description content>
 <meta name=robots content="noindex, nofollow">
-<link rel=alternate type=application/rss+xml href=https://thered3rdeye.github.io/categories/index.xml>
 <link href=/output/css/main.166474c2adad740c325e334f04665ab11fac6321b2e4394ef294bbd02fc0648d.css integrity="sha256-FmR0wq2tdAwyXjNPBGZasR+sYyGy5DlO8pS70C/AZI0=" rel=stylesheet crossorigin=anonymous>
 <link href="https://fonts.googleapis.com/css?family=Raleway:400,200,600" rel=stylesheet type=text/css>
-<meta property="og:title" content="Categories">
-<meta property="og:description" content>
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://thered3rdeye.github.io/categories/"><meta property="og:site_name" content="The Red 3rd Eye">
-<meta itemprop=name content="Categories">
-<meta itemprop=description content><meta name=twitter:card content="summary">
-<meta name=twitter:title content="Categories">
-<meta name=twitter:description content>
+<meta property="og:title" content="Better Dotfiles Management">
+<meta property="og:description" content="In case you don&rsquo;t know what dotfiles and its purpose is, refer to this. Dotfiles is a thing that most linux users have and they really put a lot of caring to them. It is really useful when you have to work on multiple environment and just want to get things done quickly. Talking about dotfiles management, there are two main method to manage them: bare git repos or simply just yadm.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://thered3rdeye.github.io/post/better-dotfiles-management/"><meta property="article:section" content="post">
+<meta property="article:published_time" content="2021-08-14T15:57:06+07:00">
+<meta property="article:modified_time" content="2021-08-14T15:57:06+07:00"><meta property="og:site_name" content="The Red 3rd Eye">
+<meta itemprop=name content="Better Dotfiles Management">
+<meta itemprop=description content="In case you don&rsquo;t know what dotfiles and its purpose is, refer to this. Dotfiles is a thing that most linux users have and they really put a lot of caring to them. It is really useful when you have to work on multiple environment and just want to get things done quickly. Talking about dotfiles management, there are two main method to manage them: bare git repos or simply just yadm."><meta itemprop=datePublished content="2021-08-14T15:57:06+07:00">
+<meta itemprop=dateModified content="2021-08-14T15:57:06+07:00">
+<meta itemprop=wordCount content="377">
+<meta itemprop=keywords content><meta name=twitter:card content="summary">
+<meta name=twitter:title content="Better Dotfiles Management">
+<meta name=twitter:description content="In case you don&rsquo;t know what dotfiles and its purpose is, refer to this. Dotfiles is a thing that most linux users have and they really put a lot of caring to them. It is really useful when you have to work on multiple environment and just want to get things done quickly. Talking about dotfiles management, there are two main method to manage them: bare git repos or simply just yadm.">
 </head>
 <body class="bg-gray-800 font-sans text-gray-400 subpixel-antialiased flex flex-col h-screen justify-between tracking-wide">
 <header class="bg-gray-700 py-3">
@@ -28,11 +32,6 @@ The Red 3rd Eye
 </a>
 </div>
 <div class="flex items-center flex-wrap">
-<ul>
-<li>
-<a class=hover:font-bold href=/vn/categories/>vn</a>
-</li>
-</ul>
 <ul class="flex items-center flex-wrap">
 <li class=ml-4>
 <a class=hover:text-white href=/post/ title="Posts page">Posts</a>
@@ -43,9 +42,62 @@ The Red 3rd Eye
 </header>
 <main class="container mb-auto mt-20">
 <article>
-<div></div>
+<header class="text-center py-20">
+<h1 class="text-5xl pb-2">Better Dotfiles Management</h1>
+<div class="flex place-content-center">
+<time datetime=2021-08-14T15:57:06+07:00>
+August 14, 2021
+</time>
+</div>
+</header>
 <section>
+<p>In case you don&rsquo;t know what dotfiles and its purpose is, refer to <a href=https://www.freecodecamp.org/news/dive-into-dotfiles-part-1-e4eb1003cff6/>this</a>.
+Dotfiles is a thing that most linux users have and they really put a lot of caring to them. It is really useful when you have to work on multiple environment and just want to get things done quickly. Talking about dotfiles management, there are two main method to manage them: <a href=https://www.atlassian.com/git/tutorials/dotfiles>bare git repos</a> or simply just <a href=https://yadm.io/#>yadm</a>. These ways are really cumbersome and can easily screwed you up really bad especially when you don&rsquo;t have much experience with GNU/Linux. Luckily, <a href=https://www.gnu.org/software/stow/>GNU Stow</a> can handle your dotfiles repo easily.</p>
+<h2 id=gnu-stow>GNU Stow?</h2>
+<p>Basically, <strong>GNU Stow</strong> copy existing files from the repo to its <strong>pseudo location</strong> by marking the repo&rsquo;s root as <strong>~</strong>.</p>
+<p>Since <strong>Stow</strong> is a GNU package, it is available and even pre-installed on many mainstream GNU/Linux Distributions. Use your own package manager to install the package <code>stow</code> in case it isn&rsquo;t present on your machine yet.</p>
+<h2 id=how-to-construct-your-own-dotfiles>How to construct your own dotfiles?</h2>
+<p>Assuming you already have <code>git</code> and <code>stow</code>.</p>
+<ul>
+<li>Create a new directory named <strong>dotfiles</strong> (It must be located on your home directory, I&rsquo;ll explain this later):</li>
+</ul>
+<pre><code>mkdir -p ~/dotfiles
+</code></pre><ul>
+<li>Now pretending that the <strong>dotfiles</strong> folder is your <strong>~</strong> directory. Move everyfolder and files from the <strong>~</strong> directory to the <strong>dotfiles</strong> directory:</li>
+</ul>
+<pre><code>cd ~/dotfiles/
+mv ~/.zsh* .
+mv ~/.config .
+mv ~/.vimrc .
+mv ~/.xmonad .
+mv ~/.gitconfig .
+mv ~/.bash* .
+and so on...
+</code></pre><ul>
+<li>After moving files and dirs to the dotfiles repo, simply just <strong>stow</strong> it and we&rsquo;re done!</li>
+</ul>
+<pre><code>cd ~
+stow dotfiles
+</code></pre><p>Now list the home directory and see the expected result:</p>
+<pre><code>╭─higanbana@amberbox ~
+╰─$ ls ~ | grep &quot;\-&gt;&quot;
+lrwxrwxrwx   21 higanbana  5 Aug 14:48 .doom.d -&gt; dotfiles/doom/.doom.d
+lrwxrwxrwx   23 higanbana  5 Aug 14:48 .xmonad -&gt; dotfiles/xmonad/.xmonad
+lrwxrwxrwx   27 higanbana  5 Aug 14:48 .bash_history -&gt; dotfiles/bash/.bash_history
+lrwxrwxrwx   26 higanbana  5 Aug 14:48 .bash_logout -&gt; dotfiles/bash/.bash_logout
+lrwxrwxrwx   27 higanbana  5 Aug 14:48 .bash_profile -&gt; dotfiles/bash/.bash_profile
+lrwxrwxrwx   21 higanbana  5 Aug 14:48 .bashrc -&gt; dotfiles/bash/.bashrc
+lrwxrwxrwx   23 higanbana  5 Aug 14:48 .gitconfig -&gt; dotfiles/git/.gitconfig
+lrwxrwxrwx   30 higanbana 13 Aug 23:26 .nfdp -&gt; dotfiles/neofetchdisplay/.nfdp
+lrwxrwxrwx   20 higanbana  5 Aug 14:48 .zshenv -&gt; dotfiles/zsh/.zshenv
+lrwxrwxrwx   19 higanbana  9 Aug 15:36 .zshrc -&gt; dotfiles/zsh/.zshrc
+lrwxrwxrwx   33 higanbana  5 Aug 14:48 .zshrc.pre-oh-my-zsh -&gt; dotfiles/zsh/.zshrc.pre-oh-my-zsh
+</code></pre>
+<ul class="flex list-none mt-20 ml-0 p-0">
+</ul>
 </section>
+<div class=mt-20>
+</div>
 </article>
 </main>
 <footer class="container mt-20 py-10 border-t border-gray-700">
