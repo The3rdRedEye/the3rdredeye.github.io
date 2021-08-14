@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The Red 3rd Eye</title>
+    <link>https://thered3rdeye.github.io/</link>
+    <description>Recent content on The Red 3rd Eye</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© The Red 3rd Eye</copyright><atom:link href="https://thered3rdeye.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://thered3rdeye.github.io/about/</link>
+      <pubDate>Fri, 13 Aug 2021 17:52:32 +0700</pubDate>
+      
+      <guid>https://thered3rdeye.github.io/about/</guid>
+      <description>About page</description>
+    </item>
+    
+  </channel>
+</rss>

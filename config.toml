@@ -14,9 +14,8 @@ summaryLength = 20
 
 [params]
     subtitle = ""
-    mainSections = ["posts"]
+    intro = true
     featherIconsCDN = true
-    favicon = "icons/myicon.png"    
     mode = "dark"
 
 [[menu.main]]
@@ -44,5 +43,3 @@ name = "Github"
 icon = "github"
 url = "https://github.com/TheRed3rdEye/thered3rdeye.github.io"
 
-[taxonomies]
-    tag = "tags"
