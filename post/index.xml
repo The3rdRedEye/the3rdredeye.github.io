@@ -1,1 +1,42 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on The Red 3rd Eye</title><link>https://thered3rdeye.github.io/post/</link><description>Recent content in Posts on The Red 3rd Eye</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 14 Aug 2021 15:57:06 +0700</lastBuildDate><atom:link href="https://thered3rdeye.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Better Dotfiles Management</title><link>https://thered3rdeye.github.io/post/better-dotfiles-management/</link><pubDate>Sat, 14 Aug 2021 15:57:06 +0700</pubDate><guid>https://thered3rdeye.github.io/post/better-dotfiles-management/</guid><description>In case you don&amp;rsquo;t know what dotfiles and its purpose is, refer to this. Dotfiles is a thing that most linux users have and they really put a lot of caring to them. It is really useful when you have to work on multiple environment and just want to get things done quickly. Talking about dotfiles management, there are two main method to manage them: bare git repos or simply just yadm.</description></item></channel></rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on The Red 3rd Eye</title><link>https://thered3rdeye.github.io/post/</link><description>The Red 3rd Eye (Posts)</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Sat, 14 Aug 2021 15:57:06 +0700</lastBuildDate><atom:link href="https://thered3rdeye.github.io/post/index.xml" rel="self" type="application/rss+xml"/><item><title>Better Dotfiles Management</title><link>https://thered3rdeye.github.io/post/better-dotfiles-management/</link><pubDate>Sat, 14 Aug 2021 15:57:06 +0700</pubDate><guid>https://thered3rdeye.github.io/post/better-dotfiles-management/</guid><description>&lt;p>In case you don&amp;rsquo;t know what dotfiles and its purpose is, refer to &lt;a href="https://www.freecodecamp.org/news/dive-into-dotfiles-part-1-e4eb1003cff6/">this&lt;/a>.
+Dotfiles is a thing that most linux users have and they really put a lot of caring to them. It is really useful when you have to work on multiple environment and just want to get things done quickly. Talking about dotfiles management, there are two main method to manage them: &lt;a href="https://www.atlassian.com/git/tutorials/dotfiles">bare git repos&lt;/a> or simply just &lt;a href="https://yadm.io/#">yadm&lt;/a>. These ways are really cumbersome and can easily screwed you up really bad especially when you don&amp;rsquo;t have much experience with GNU/Linux. Luckily, &lt;a href="https://www.gnu.org/software/stow/">GNU Stow&lt;/a> can handle your dotfiles repo easily.&lt;/p>
+&lt;h2 id="gnu-stow">GNU Stow?&lt;/h2>
+&lt;p>Basically, &lt;strong>GNU Stow&lt;/strong> copy existing files from the repo to its &lt;strong>pseudo location&lt;/strong> by marking the repo&amp;rsquo;s root as &lt;strong>~&lt;/strong>.&lt;/p>
+&lt;p>Since &lt;strong>Stow&lt;/strong> is a GNU package, it is available and even pre-installed on many mainstream GNU/Linux Distributions. Use your own package manager to install the package &lt;code>stow&lt;/code> in case it isn&amp;rsquo;t present on your machine yet.&lt;/p>
+&lt;h2 id="how-to-construct-your-own-dotfiles">How to construct your own dotfiles?&lt;/h2>
+&lt;p>Assuming you already have &lt;code>git&lt;/code> and &lt;code>stow&lt;/code>.&lt;/p>
+&lt;ul>
+&lt;li>Create a new directory named &lt;strong>dotfiles&lt;/strong> (It must be located on your home directory, I&amp;rsquo;ll explain this later):&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>mkdir -p ~/dotfiles
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>Now pretending that the &lt;strong>dotfiles&lt;/strong> folder is your &lt;strong>~&lt;/strong> directory. Move everyfolder and files from the &lt;strong>~&lt;/strong> directory to the &lt;strong>dotfiles&lt;/strong> directory:&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>cd ~/dotfiles/
+mv ~/.zsh* .
+mv ~/.config .
+mv ~/.vimrc .
+mv ~/.xmonad .
+mv ~/.gitconfig .
+mv ~/.bash* .
+and so on...
+&lt;/code>&lt;/pre>&lt;ul>
+&lt;li>After moving files and dirs to the dotfiles repo, simply just &lt;strong>stow&lt;/strong> it and we&amp;rsquo;re done!&lt;/li>
+&lt;/ul>
+&lt;pre>&lt;code>cd ~
+stow dotfiles
+&lt;/code>&lt;/pre>&lt;p>Now list the home directory and see the expected result:&lt;/p>
+&lt;pre>&lt;code>╭─higanbana@amberbox ~
+╰─$ ls ~ | grep &amp;quot;\-&amp;gt;&amp;quot;
+lrwxrwxrwx 21 higanbana 5 Aug 14:48 .doom.d -&amp;gt; dotfiles/doom/.doom.d
+lrwxrwxrwx 23 higanbana 5 Aug 14:48 .xmonad -&amp;gt; dotfiles/xmonad/.xmonad
+lrwxrwxrwx 27 higanbana 5 Aug 14:48 .bash_history -&amp;gt; dotfiles/bash/.bash_history
+lrwxrwxrwx 26 higanbana 5 Aug 14:48 .bash_logout -&amp;gt; dotfiles/bash/.bash_logout
+lrwxrwxrwx 27 higanbana 5 Aug 14:48 .bash_profile -&amp;gt; dotfiles/bash/.bash_profile
+lrwxrwxrwx 21 higanbana 5 Aug 14:48 .bashrc -&amp;gt; dotfiles/bash/.bashrc
+lrwxrwxrwx 23 higanbana 5 Aug 14:48 .gitconfig -&amp;gt; dotfiles/git/.gitconfig
+lrwxrwxrwx 30 higanbana 13 Aug 23:26 .nfdp -&amp;gt; dotfiles/neofetchdisplay/.nfdp
+lrwxrwxrwx 20 higanbana 5 Aug 14:48 .zshenv -&amp;gt; dotfiles/zsh/.zshenv
+lrwxrwxrwx 19 higanbana 9 Aug 15:36 .zshrc -&amp;gt; dotfiles/zsh/.zshrc
+lrwxrwxrwx 33 higanbana 5 Aug 14:48 .zshrc.pre-oh-my-zsh -&amp;gt; dotfiles/zsh/.zshrc.pre-oh-my-zsh
+&lt;/code>&lt;/pre></description></item></channel></rss>
